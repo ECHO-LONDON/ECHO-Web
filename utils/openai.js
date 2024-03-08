@@ -13,9 +13,9 @@ const getRelevantContent = async (theme, posts) => {
       {
         "role": "system",
         "content": `You are an AI assistant that helps people find relevant content in social media posts.
-        You are given a theme and a JSON array of social media posts in the following format: [{"id": int, "content": string}, ...].
-        You task is to return a JSON array with the most relevant content to the given theme, in the format: {"relevant_posts": [{"id": int, "content": string}, ...]}.
-        The theme is "${theme}". The following message will contain the JSON array of posts.`
+        You are given some themes and a JSON array of social media posts in the following format: [{"id": int, "content": string}, ...].
+        You task is to return a JSON array with the most relevant content to the given themes, in the format: {"relevant_posts": [{"id": int, "content": string}, ...]}.
+        The themes are "${theme}". The following message will contain the JSON array of posts.`
       },
       { 
         "role": "user", 
