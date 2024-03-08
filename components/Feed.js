@@ -9,7 +9,8 @@ import { SelectInterest } from "./SelectInterest";
 
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
-  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [selectedInterests, setSelectedInterests] = useState(["Technology"]);
+  const [queriedInterests, setQueriedInterests] = useState(["Technology"]);
 
   const interests = ['Technology', 'Politics', 'Science']
 
@@ -19,11 +20,15 @@ const Feed = () => {
         ? currentInterests.filter(i => i !== interest)
         : [...currentInterests, interest]
     );
-    setTweets([]);
   };
 
+  const handleUpdateInterests = () => {
+    setQueriedInterests(selectedInterests);
+    setTweets([]);
+  }
+
   useEffect(() => {
-    fetch("/api/mastodonExplore?theme=" + selectedInterests.join(","))
+    fetch("/api/mastodonExplore?theme=" + queriedInterests.join(","))
       .then((response) => response.json())
       .then((data) => {
         data = data.map((tweet) => {
@@ -35,11 +40,12 @@ const Feed = () => {
         });
         setTweets(data)
       });
-  }, [selectedInterests]);
+  }, [queriedInterests]);
 
   return (
     <div>
-      <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} />
+      <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
+
       {tweets.length 
       ? tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
       : <div className="flex justify-center items-center h-64">
