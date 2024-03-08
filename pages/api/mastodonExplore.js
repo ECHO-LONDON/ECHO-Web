@@ -22,8 +22,9 @@ export default async function handler(req, res) {
     });
 
     const relevantContent = await getRelevantContent(theme, postsContent);
+    const relevantPosts = relevantContent.relevant_posts.map(post => posts[post.id]);
 
-    return res.status(200).json(relevantContent);
+    return res.status(200).json(relevantPosts);
   } catch (error) {
     console.error('Mastodon API search error:', error);
     return res.status(500).json({ error: 'Internal server error' });
