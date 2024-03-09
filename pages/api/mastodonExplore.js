@@ -12,23 +12,31 @@ export default async function handler(req, res) {
       posts = posts.concat(response.data);
     }
 
-    const postsContent = posts.map((post, index) => {
+    // from hashtag
+    const theme = req.query.theme;
+
+    if (!theme) {
+      return res.status(200).json(posts);
+    }
+    
+    let postsContent = posts.map((post, index) => {
       return {
         id: index,
         content: post.content
       }
     });
 
-    const theme = req.query.theme;
+    let relevantContent = await getRelevantContent(theme, postsContent);
+    let relevantPosts = relevantContent.relevant_posts.map(post => posts[post.id]);
 
-    if (!theme) {
-      return res.status(200).json(posts);
+    posts = [];
+    const tags = theme.split(',');
+    for (let tag of tags) {
+      const response = await axios.get(`${MASTODON_API_URL}/timelines/tag/${tag}`);
+      posts = posts.concat(response.data);
     }
 
-    const relevantContent = await getRelevantContent(theme, postsContent);
-    const relevantPosts = relevantContent.relevant_posts.map(post => posts[post.id]);
-
-    return res.status(200).json(relevantPosts);
+    return res.status(200).json(posts);
   } catch (error) {
     console.error('Mastodon API search error:', error);
     return res.status(500).json({ error: 'Internal server error' });

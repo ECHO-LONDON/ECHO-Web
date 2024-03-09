@@ -81,7 +81,28 @@ const Feed = () => {
               votes: post.data.ups - post.data.downs
             };
           });
-          setRedditPosts(data);
+          setRedditPosts(currentPosts => [...currentPosts, ...data])
+      });
+
+      fetch("/api/redditExplore?theme=" + queriedInterests.join(",") , {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token: localStorage.getItem('redditAccessToken') })
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          data = data.map((post) => {
+            return {
+              subreddit: post.data.subreddit_name_prefixed,
+              title: post.data.title,
+              content: post.data.selftext,
+              image: post.data.url,
+              votes: post.data.ups - post.data.downs
+            };
+          });
+          setRedditPosts(currentPosts => [...currentPosts, ...data]);
       });
   }, [queriedInterests]);
 
@@ -90,7 +111,7 @@ const Feed = () => {
       <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
       <ConnectRedditButton onClick={handleConnectReddit} />
 
-      {(tweets.length || redditPosts.length)
+      {(tweets.length && redditPosts.length)
       ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} />
       : <div className="flex justify-center items-center h-64">
         <TailSpin
