@@ -9,8 +9,8 @@ import { SelectInterest } from "./SelectInterest";
 
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
-  const [selectedInterests, setSelectedInterests] = useState(["Technology"]);
-  const [queriedInterests, setQueriedInterests] = useState(["Technology"]);
+  const [selectedInterests, setSelectedInterests] = useState([]);
+  const [queriedInterests, setQueriedInterests] = useState([]);
 
   const interests = ['Technology', 'Politics', 'Science']
 
@@ -36,6 +36,14 @@ const Feed = () => {
             id: tweet.id,
             content: tweet.content,
             author: tweet.account.display_name,
+            avatar: tweet.account.avatar,
+            attachments: tweet.media_attachments.map((attachment) => {
+              return {
+                type: attachment.type,
+                url: attachment.url,
+                description: attachment.description
+              };
+            })
           };
         });
         setTweets(data)
@@ -47,7 +55,9 @@ const Feed = () => {
       <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
 
       {tweets.length 
-      ? tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
+      ? <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+        {tweets.map(tweet => (<Tweet key={tweet.id} tweet={tweet} />))}
+      </div>
       : <div className="flex justify-center items-center h-64">
         <TailSpin
           visible={true}

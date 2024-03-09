@@ -3,13 +3,11 @@ import { getRelevantContent } from '@/utils/openai'
 
 export default async function handler(req, res) {
 
-  const theme = req.query.theme;
-
   try {
     const { MASTODON_ACCESS_TOKEN, MASTODON_API_URL } = process.env;
 
     let posts = [];
-    for (let offset = 0; offset < 100; offset += 20) {
+    for (let offset = 0; offset < 80; offset += 20) {
       const response = await axios.get(`${MASTODON_API_URL}/trends/statuses?limit=20&offset=${offset}`);
       posts = posts.concat(response.data);
     }
@@ -20,6 +18,12 @@ export default async function handler(req, res) {
         content: post.content
       }
     });
+
+    const theme = req.query.theme;
+
+    if (!theme) {
+      return res.status(200).json(posts);
+    }
 
     const relevantContent = await getRelevantContent(theme, postsContent);
     const relevantPosts = relevantContent.relevant_posts.map(post => posts[post.id]);
