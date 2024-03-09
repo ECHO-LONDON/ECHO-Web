@@ -32,7 +32,7 @@ const InterleavedFeed = ({tweets, redditPosts}) => {
         item.type === 'tweet' ? (
           <Tweet key={`tweet-${index}`} tweet={item.data} handleFeedback={handleFeedback} />
         ) : (
-          <RedditPost key={`reddit-${index}`} post={item.data} />
+          <RedditPost key={`reddit-${index}`} post={item.data} handleFeedback={handleFeedback} />
         )
       )}
     </div>

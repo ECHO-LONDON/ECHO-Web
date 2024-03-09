@@ -111,7 +111,8 @@ const Feed = () => {
               title: post.data.title,
               content: post.data.selftext,
               image: post.data.url,
-              votes: post.data.ups - post.data.downs
+              votes: post.data.ups - post.data.downs,
+              video: post.data.media?.reddit_video?.fallback_url
             };
           });
           setRedditPosts(currentPosts => [...currentPosts, ...data]);

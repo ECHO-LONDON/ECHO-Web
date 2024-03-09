@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Dropdown } from "./Dropdown";
 import { useState } from 'react';
 
-const RedditPost = ({ post }) => {
+const RedditPost = ({ post, handleFeedback }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
 
@@ -33,6 +33,16 @@ const RedditPost = ({ post }) => {
             className="mx-auto max-w-full h-auto"
             style={{ width: '90vh', height: 'auto' }}
             alt="Reddit Post Image"
+          />
+        </div> : <></>
+      }
+      {
+        post.video ? <div className="mt-2">
+          <video
+            src={post.video}
+            width="100%"
+            controls
+            className="mx-auto max-w-full h-auto"
           />
         </div> : <></>
       }
