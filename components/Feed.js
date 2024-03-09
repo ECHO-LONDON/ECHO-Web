@@ -8,6 +8,7 @@ import { ProgressBar } from "./ProgressBar";
 import { SelectInterest } from "./SelectInterest";
 import { ConnectRedditButton } from "./ConnectRedditButton";
 import { InterleavedFeed } from "./InterleavedFeed";
+import Confetti from 'react-confetti'
 
 import Swal from 'sweetalert2'
 
@@ -65,6 +66,15 @@ const Feed = () => {
       icon: 'success',
       confirmButtonText: 'OK'
     });
+    if (progress === 100 - 25) {
+      Swal.fire({
+        title: 'Congratulations!',
+        text: 'You have unlocked Echo Community!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      setProgress(0);
+    }
     progress < 100 && setProgress(progress + 25);
   };
 
@@ -136,8 +146,19 @@ const Feed = () => {
       });
   }, [queriedInterests]);
 
+  if (typeof window === "undefined") return null;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
   return (
     <div>
+      {
+        progress === 100 &&
+        <Confetti
+          width={width}
+          height={height}
+        />
+      }
       <div className="flex justify-center pt-4">
         <Image src="/logo.jpeg" alt="Logo" 
           className="w-20 h-20 rounded-full object-cover opacity-90 hover:scale-110 hover:opacity-100" width={80} height={80} 
