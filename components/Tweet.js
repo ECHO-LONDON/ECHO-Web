@@ -7,7 +7,7 @@ const Tweet = ({ tweet, handleFeedback }) => {
   const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
 
   return (
-    <div className="flex gap-4 p-4 border border-gray-200 rounded-lg m-4 bg-gray-700 overflow-hidden">
+    <div className="flex gap-4 p-4 border border-gray-200 rounded-lg m-4 bg-gradient-to-b from-red-400 to-orange-400 overflow-hidden">
       <Image
         src={tweet.avatar}
         alt="Avatar"
@@ -44,7 +44,7 @@ const Tweet = ({ tweet, handleFeedback }) => {
             )}
           </div>
         ))}
-        <div className="text-sm text-gray-400 mt-2">
+        <div className="text-sm text-gray-100 mt-2">
           Source: Mastodon
         </div>
       </div>

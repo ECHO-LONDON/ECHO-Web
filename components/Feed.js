@@ -9,6 +9,7 @@ import { ConnectRedditButton } from "./ConnectRedditButton";
 import { InterleavedFeed } from "./InterleavedFeed";
 
 const Feed = () => {
+
   const [tweets, setTweets] = useState([]);
   const [redditPosts, setRedditPosts] = useState([]);
 
@@ -18,6 +19,15 @@ const Feed = () => {
   const interests = [
     "Technology", "Politics", "Science", "Art", "Music", "Travel"
   ];
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && !localStorage.getItem('interests')) {
+      window.location.href = "/onboarding";
+      return;
+    } else if (localStorage.getItem('interests')) {
+      setSelectedInterests(JSON.parse(localStorage.getItem('interests')));
+    }
+  }, []);
 
   const handleInterestToggle = (interest) => {
     setSelectedInterests(currentInterests =>
@@ -112,7 +122,6 @@ const Feed = () => {
     <div>
       <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
       <ConnectRedditButton onClick={handleConnectReddit} />
-
       {
         (tweets.length || redditPosts.length)
         ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} /> : null

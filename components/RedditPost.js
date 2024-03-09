@@ -7,7 +7,7 @@ const RedditPost = ({ post }) => {
   const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
 
   return (
-    <div className="m-4 p-4 max-w-md bg-gray-700 border border-gray-200 rounded-xl shadow-md overflow-hidden">
+    <div className="m-4 p-4 max-w-md bg-gradient-to-b from-teal-400 to-sky-800 border border-gray-200 rounded-xl shadow-md overflow-hidden">
       <div className="relative">
         <button onClick={toggleDropdown} className="p-2 rounded-full absolute right-0">
           <span className="text-white">⋮</span> {/* Three dots icon */}
@@ -42,7 +42,7 @@ const RedditPost = ({ post }) => {
             <span className="text-green-500">↑ {post.votes}</span> :
             <span className="text-red-500">↓ {post.votes}</span>
         }
-        <div className="text-sm text-gray-400 mt-2">
+        <div className="text-sm text-gray-100 mt-2">
           Source: Reddit
         </div>
       </div>
