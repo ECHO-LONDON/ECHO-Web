@@ -1,6 +1,11 @@
 import Image from "next/image";
+import { useState } from "react";
+import { Dropdown } from "./Dropdown";
 
 const Tweet = ({ tweet }) => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
+
   return (
     <div className="flex gap-4 p-4 border border-gray-200 rounded-lg m-4 bg-gray-700 overflow-hidden">
       <Image
@@ -11,6 +16,14 @@ const Tweet = ({ tweet }) => {
         height={40}
       />
       <div className="flex-1 min-w-0">
+        <div className="relative">
+          <button onClick={toggleDropdown} className="p-2 rounded-full absolute right-0">
+            <span className="text-white">⋮</span> {/* Three dots icon */}
+          </button>
+          {isDropdownVisible && (
+            <Dropdown onClick={toggleDropdown} isVisible={isDropdownVisible} />
+          )}
+        </div>
         <h5 className="font-bold">{tweet.author}</h5>
         <p className="whitespace-pre-wrap break-words" dangerouslySetInnerHTML={{ __html: tweet.content }} />
         {tweet.attachments.map((attachment, index) => (
