@@ -79,6 +79,7 @@
     border: 1px solid #b2bec3; 
     border-radius: 5px; 
     box-sizing: border-box; 
+    color:#000000;
   }
   
   /* Submit button styling */
@@ -107,6 +108,7 @@
     text-align: center;
     margin-top: 20px; 
     font-family: 'Verdana';
+    color: #000000;
   }
   
   .loginLink a {
