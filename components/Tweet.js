@@ -20,15 +20,15 @@ const Tweet = ({ tweet }) => {
                 src={attachment.url} 
                 width={0}
                 height={0}
-                sizes="90%"
+                sizes="90vh"
                 className="mx-auto max-w-full h-auto"
-                style={{ width: '90%', height: 'auto' }} // optional
+                style={{ width: '90vh', height: 'auto' }} // optional
                 alt={attachment.description}
               />
             )}
           </div>
         ))}
-        <div className="text-sm text-gray-500 mt-2">
+        <div className="text-sm text-gray-400 mt-2">
           Source: Mastodon
         </div>
       </div>

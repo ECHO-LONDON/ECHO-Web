@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['files.mastodon.social']
+    domains: [
+      'files.mastodon.social',
+      'i.redd.it'
+    ]
   }
 };
 
