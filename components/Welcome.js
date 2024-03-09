@@ -1,14 +1,22 @@
+"use client";
+
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const WelcomeAnimation = ({ setStep }) => {
+
+  let w = 0;
+  if (typeof window !== "undefined") {
+    w = window.innerWidth;
+  }
+
   return (
     <div className="flex justify-center text-center items-center h-screen bg-gradient-to-r from-red-400 to-orange-400 text-white">
       <div>
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          exit={{ x: -window.innerWidth }}
+          exit={{ x: -w }}
           transition={{
             type: "spring",
             stiffness: 260,
@@ -20,7 +28,7 @@ const WelcomeAnimation = ({ setStep }) => {
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          exit={{ x: -window.innerWidth }}
+          exit={{ x: -w }}
         >
           <h1 className="text-4xl md:text-6xl font-bold">
             Welcome to Echo.

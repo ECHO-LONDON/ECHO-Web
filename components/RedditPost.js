@@ -23,7 +23,7 @@ const RedditPost = ({ post }) => {
         <div className="font-bold text-xl mb-2">{post.title}</div>
         <p>{post.content}</p>
       </div>
-      {(post.image.includes(".jpg") || post.image.includes(".png")) || post.image.includes(".jpeg") ?
+      {(post.image.includes(".jpg") || post.image.includes(".png")) || post.image.includes(".jpeg") || post.image.includes(".gif") || post.image.includes(".webp") ?
         <div className="mt-2">
           <Image
             src={post.image}
