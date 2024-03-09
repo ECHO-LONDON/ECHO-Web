@@ -1,3 +1,5 @@
+import SweetAlert2 from 'react-sweetalert2';
+
 function Dropdown({ isVisible, onClick }) {
   if (!isVisible) return null;
 

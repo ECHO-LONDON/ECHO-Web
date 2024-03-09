@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Dropdown } from "./Dropdown";
 
-const Tweet = ({ tweet }) => {
+const Tweet = ({ tweet, handleFeedback }) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
 
@@ -21,7 +21,10 @@ const Tweet = ({ tweet }) => {
             <span className="text-white">⋮</span> {/* Three dots icon */}
           </button>
           {isDropdownVisible && (
-            <Dropdown onClick={toggleDropdown} isVisible={isDropdownVisible} />
+            <Dropdown onClick={(e) => {
+              toggleDropdown();
+              handleFeedback(e)
+            }} isVisible={isDropdownVisible} />
           )}
         </div>
         <h5 className="font-bold">{tweet.author}</h5>

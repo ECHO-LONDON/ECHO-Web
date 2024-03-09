@@ -1,9 +1,25 @@
 import Image from 'next/image';
+import { Dropdown } from "./Dropdown";
+import { useState } from 'react';
 
 const RedditPost = ({ post }) => {
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const toggleDropdown = () => setDropdownVisible(!isDropdownVisible);
+
   return (
-    <div className="m-4 max-w-md bg-gray-700 border border-gray-200 rounded-xl shadow-md overflow-hidden">
-      <div className="p-8">
+    <div className="m-4 p-4 max-w-md bg-gray-700 border border-gray-200 rounded-xl shadow-md overflow-hidden">
+      <div className="relative">
+        <button onClick={toggleDropdown} className="p-2 rounded-full absolute right-0">
+          <span className="text-white">⋮</span> {/* Three dots icon */}
+        </button>
+        {isDropdownVisible && (
+          <Dropdown onClick={(e) => {
+            toggleDropdown();
+            handleFeedback(e)
+          }} isVisible={isDropdownVisible} />
+        )}
+      </div>
+      <div className="p-4">
         <div className="font-bold text-xl mb-2">{post.title}</div>
         <p>{post.content}</p>
       </div>

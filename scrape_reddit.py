@@ -9,9 +9,9 @@ result = []
 result = json.loads(open("reddit_data.json").read())
 
 i = 0
-i = 2
+i = 5
 # for query in ["politics", "solana news", "machine learning", "computer vision", "global warming", "international space station"]:
-for query in ["machine learning", "computer vision", "global warming", "international space station"]:
+for query in ["international space station"]:
   response = requests.get(API_URL + query, headers={"Authorization": f"bearer {TOKEN}"}, proxies={"https": "http://localhost:8080"}, verify=False)
   data = response.json()['data']
 
