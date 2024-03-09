@@ -15,7 +15,9 @@ const Feed = () => {
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [queriedInterests, setQueriedInterests] = useState([]);
 
-  const interests = ['Technology', 'Politics', 'Science']
+  const interests = [
+    "Technology", "Politics", "Science", "Art", "Music", "Travel"
+  ];
 
   const handleInterestToggle = (interest) => {
     setSelectedInterests(currentInterests =>
@@ -111,9 +113,13 @@ const Feed = () => {
       <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
       <ConnectRedditButton onClick={handleConnectReddit} />
 
-      {(tweets.length && redditPosts.length)
-      ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} />
-      : <div className="flex justify-center items-center h-64">
+      {
+        (tweets.length || redditPosts.length)
+        ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} /> : null
+      }
+      {
+        (!tweets.length || !redditPosts.length) ?
+        <div className="flex justify-center items-center h-64">
         <TailSpin
           visible={true}
           height="80"
@@ -124,7 +130,8 @@ const Feed = () => {
           wrapperStyle={{}}
           wrapperClass=""
         />
-      </div>}
+      </div> : null
+      }
     </div>
   );
 }
