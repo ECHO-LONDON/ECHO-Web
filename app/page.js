@@ -7,7 +7,7 @@ import { TailSpin } from 'react-loader-spinner'
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-900">
       <Feed />
     </div>
   );

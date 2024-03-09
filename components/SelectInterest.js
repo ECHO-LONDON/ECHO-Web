@@ -1,6 +1,6 @@
 const SelectInterest = ({ interests, selectedInterests, onInterestToggle, onUpdateInterests }) => {
   return (
-    <div className="flex flex-wrap gap-2 p-4">
+    <div className="flex flex-wrap gap-2 p-4 justify-center">
       {interests.map(interest => (
         <button
           key={interest}

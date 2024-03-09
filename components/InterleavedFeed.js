@@ -1,18 +1,7 @@
 import { RedditPost } from "./RedditPost";
 import { Tweet } from "./Tweet";
-import Swal from 'sweetalert2'
 
-const InterleavedFeed = ({tweets, redditPosts}) => {
-  
-  const handleFeedback = (e) => {
-    console.log(e.target.innerText);
-    Swal.fire({
-      title: 'Feedback',
-      text: 'Thanks for your feedback!',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
-  };
+const InterleavedFeed = ({tweets, redditPosts, handleFeedback }) => {
 
   const maxLength = Math.max(tweets.length, redditPosts.length);
   const combinedFeed = [];

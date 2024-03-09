@@ -4,9 +4,13 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { TailSpin } from 'react-loader-spinner'
 
+import { ProgressBar } from "./ProgressBar";
 import { SelectInterest } from "./SelectInterest";
 import { ConnectRedditButton } from "./ConnectRedditButton";
 import { InterleavedFeed } from "./InterleavedFeed";
+
+import Swal from 'sweetalert2'
+
 
 const Feed = () => {
 
@@ -15,6 +19,9 @@ const Feed = () => {
 
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [queriedInterests, setQueriedInterests] = useState([]);
+
+  const [showOptions, setShowOptions] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const interests = [
     "Technology", "Politics", "Science", "Art", "Music", "Travel"
@@ -49,6 +56,16 @@ const Feed = () => {
       .then((data) => {
         window.location.href = data.url;
       });
+  };
+
+  const handleFeedback = (e) => {
+    Swal.fire({
+      title: 'Feedback',
+      text: 'Thanks for your feedback!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
+    progress < 100 && setProgress(progress + 25);
   };
 
   useEffect(() => {
@@ -121,11 +138,27 @@ const Feed = () => {
 
   return (
     <div>
-      <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
-      <ConnectRedditButton onClick={handleConnectReddit} />
+      <div className="flex justify-center pt-4">
+        <Image src="/logo.jpeg" alt="Logo" 
+          className="w-20 h-20 rounded-full object-cover opacity-90 hover:scale-110 hover:opacity-100" width={80} height={80} 
+          onClick={() => setShowOptions(!showOptions)}
+        />
+      </div>
+      {
+        showOptions &&
+        <div className="text-center mt-4 bg-gray-700 p-4">
+          <h1 className="text-2xl text-white font-bold">Options</h1>
+          <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
+          <ConnectRedditButton onClick={handleConnectReddit} />
+        </div>
+      }
+      <div>
+        <h1 className="text-2xl text-white font-bold text-center mt-4">🔒 COMMUNITY</h1>
+        <ProgressBar progress={progress} />
+      </div>
       {
         (tweets.length || redditPosts.length)
-        ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} /> : null
+        ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} handleFeedback={handleFeedback} /> : null
       }
       {
         (!tweets.length || !redditPosts.length) ?
