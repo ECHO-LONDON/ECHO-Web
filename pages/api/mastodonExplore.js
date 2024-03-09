@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     const { MASTODON_ACCESS_TOKEN, MASTODON_API_URL } = process.env;
 
     let posts = [];
-    for (let offset = 0; offset < 80; offset += 20) {
+    for (let offset = 0; offset < 60; offset += 20) {
       const response = await axios.get(`${MASTODON_API_URL}/trends/statuses?limit=20&offset=${offset}`);
       posts = posts.concat(response.data);
     }

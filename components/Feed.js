@@ -28,6 +28,7 @@ const Feed = () => {
   const handleUpdateInterests = () => {
     setQueriedInterests(selectedInterests);
     setTweets([]);
+    setRedditPosts([]);
   }
 
   const handleConnectReddit = () => {
@@ -39,7 +40,7 @@ const Feed = () => {
   };
 
   useEffect(() => {
-    fetch("/api/mastodonExplore?theme=" + queriedInterests.join(","))
+    fetch("/api/mastodonExplore?theme=" + queriedInterests.join(","), { method: "POST" })
       .then((response) => response.json())
       .then((data) => {
         data = data.map((tweet) => {
@@ -62,7 +63,7 @@ const Feed = () => {
 
       if (!localStorage.getItem('redditAccessToken')) return;
 
-      fetch("/api/redditHome", {
+      fetch("/api/redditHome?theme=" + queriedInterests.join(",") , {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -89,7 +90,7 @@ const Feed = () => {
       <SelectInterest interests={interests} selectedInterests={selectedInterests} onInterestToggle={handleInterestToggle} onUpdateInterests={handleUpdateInterests} />
       <ConnectRedditButton onClick={handleConnectReddit} />
 
-      {tweets.length 
+      {(tweets.length || redditPosts.length)
       ? <InterleavedFeed tweets={tweets} redditPosts={redditPosts} />
       : <div className="flex justify-center items-center h-64">
         <TailSpin
