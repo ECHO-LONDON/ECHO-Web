@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import styles from './signup.module.css'; // Ensure this is the correct path to your CSS module
+import styles from './signup.module.css'; 
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -90,7 +90,7 @@ export default function SignUp() {
             <button type="submit" className={styles.submitButton}>SIGN UP</button>
 
             <p className={styles.loginLink}>
-              Already an user? <a href="/login">LOG IN</a>
+              Already a user? <a href="/login">LOG IN</a>
             </p>
           </form>
         </div>
