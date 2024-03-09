@@ -1,0 +1,132 @@
+/* General styling for the whole sign-up page */
+.signupPage {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  
+  /* Left section with the logo */
+  .logoSection {
+    background-color: #757575; 
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Logo container */
+    .logoContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    /* Logo styling */
+  .logo {
+    width: 200px; 
+    height: 200px; 
+    border-radius: 20px;
+    color: white; 
+  }
+
+  /* Logo title styling */
+  .logoTitle{
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    font-family: 'Verdana';
+  }
+  
+   /* Right section with the sign-up form */
+  .formSection {
+    background-color: #FACDB4;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* The container for the form */
+  .formContainer {
+    background-color: #fff; 
+    padding: 40px;
+    border-radius: 10px; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); 
+    width: 80%; 
+    max-width: 500px; 
+  }
+  
+  /* Form title styling */
+  .formTitle {
+    color: #000000; 
+    text-align: center;
+    margin-bottom: 30px; 
+    font-size: 50px; 
+    font-family: 'Verdana';
+  }
+  
+  /* Form fields styling */
+  .formField {
+    margin-bottom: 15px; 
+  }
+  
+  /* Input fields styling */
+  .inputField {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px; 
+    border: 1px solid #b2bec3; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+  }
+  
+  /* Submit button styling */
+  .submitButton {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background-color: #757575; 
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; 
+    font-family: 'Verdana';
+    margin-top: 10px; 
+    box-sizing: border-box; 
+    transition: background-color 0.3s; 
+  }
+  
+  /* Hover effect for the button */
+  .submitButton:hover {
+    background-color: #d35400; 
+  }
+  
+  /* Styling for the login link */
+  .loginLink {
+    text-align: center;
+    margin-top: 20px; 
+    font-family: 'Verdana';
+  }
+  
+  .loginLink a {
+    color: #757575; 
+    text-decoration: none; 
+    transition: color 0.3s; 
+  }
+  
+  /* Hover effect for the link */
+  .loginLink a:hover {
+    color: #d35400; 
+    text-decoration:underline;
+  }
+
+    /* Styling for input field titles */
+  .label {
+    font-size: 20px;
+    font-family: 'Verdana';
+    display: block;
+    margin-bottom: 4px; 
+    color: #333; 
+    font-size: 16px; 
+  }
