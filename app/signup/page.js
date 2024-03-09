@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './signup.module.css'; 
+import Image from 'next/image';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
@@ -26,7 +27,13 @@ export default function SignUp() {
     <div className={styles.signupPage}>
       <div className={styles.logoSection}>
         <div className={styles.logoContainer}>
-            <img src="/logo.jpeg" alt="Logo" className={styles.logo} />
+        <Image 
+          src="/logo.jpeg" 
+          alt="Logo" 
+          width={200} 
+          height={200} 
+          className={styles.logo} 
+        />
             <h1 className={styles.logoTitle}>ECHO</h1>
         </div>
     </div>
