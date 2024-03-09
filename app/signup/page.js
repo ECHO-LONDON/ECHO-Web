@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react';
 import styles from './signup.module.css'; // Ensure this is the correct path to your CSS module
 
@@ -24,7 +26,7 @@ export default function SignUp() {
     <div className={styles.signupPage}>
       <div className={styles.logoSection}>
         <div className={styles.logoContainer}>
-            <img src="/logo.jpg" alt="Logo" className={styles.logo} />
+            <img src="/logo.jpeg" alt="Logo" className={styles.logo} />
             <h1 className={styles.logoTitle}>ECHO</h1>
         </div>
     </div>
