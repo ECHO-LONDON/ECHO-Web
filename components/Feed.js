@@ -47,6 +47,7 @@ const Feed = () => {
 
   const handleUpdateInterests = () => {
     setQueriedInterests(selectedInterests);
+    localStorage.setItem('interests', JSON.stringify(selectedInterests));
     setTweets([]);
     setRedditPosts([]);
   }
